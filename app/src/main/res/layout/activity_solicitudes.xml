@@ -1,0 +1,228 @@
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <Button
+        android:id="@+id/benviarSolicitud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/roundedbutton"
+        android:layout_gravity="center_horizontal|bottom"
+        android:text="Enviar"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="23dp" />
+
+        <EditText
+            android:id="@+id/etCIRUJANOID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_above="@+id/spBandeja"
+            android:layout_toLeftOf="@+id/spCentro"
+            android:layout_toRightOf="@+id/textView"
+            android:layout_toEndOf="@+id/textView" />
+
+        <Spinner
+            android:id="@+id/spCentro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/spBandeja"
+            android:drawSelectorOnTop="true"
+            android:prompt="@string/defaultCenter"
+            android:layout_toEndOf="@+id/textView21"
+            android:layout_alignLeft="@+id/etprocedimientoID"
+            android:layout_alignStart="@+id/etprocedimientoID" />
+
+        <EditText
+            android:id="@+id/etfechacirugia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView15"
+            android:layout_toEndOf="@+id/benviarSolicitud"
+            android:layout_toRightOf="@+id/benviarSolicitud" />
+
+        <Spinner
+            android:id="@+id/etprocedimientoID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"
+            android:layout_below="@+id/spBandeja"
+            android:layout_toEndOf="@+id/textView20"
+            android:layout_marginTop="32dp"
+            android:layout_alignLeft="@+id/textView20"
+            android:layout_alignStart="@+id/textView20" />
+
+        <EditText
+            android:id="@+id/etautorizacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/etNSS"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/benviarSolicitud"
+            android:layout_toRightOf="@+id/benviarSolicitud" />
+
+        <Spinner
+            android:id="@+id/spArs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/etprocedimientoID"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/textView11"
+            android:layout_toLeftOf="@+id/textView11" />
+
+        <EditText
+            android:id="@+id/ettelefono_paciente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etautorizacion"
+            android:layout_toRightOf="@+id/textView17"
+            android:layout_toEndOf="@+id/textView17" />
+
+        <EditText
+            android:id="@+id/etNSS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etpaciente"
+            android:layout_toRightOf="@+id/textView7"
+            android:layout_toStartOf="@+id/textView11"
+            android:layout_toLeftOf="@+id/textView11" />
+
+        <EditText
+            android:id="@+id/etcedula"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/etautorizacion"
+            android:layout_alignEnd="@+id/etautorizacion"
+            android:layout_marginTop="26dp"
+            android:layout_toEndOf="@+id/textView20"
+            android:layout_toRightOf="@+id/textView20" />
+
+        <EditText
+            android:id="@+id/etpaciente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView9"
+            android:layout_alignLeft="@+id/etCIRUJANOID"
+            android:layout_alignStart="@+id/etCIRUJANOID"
+            android:layout_toStartOf="@+id/textView11"
+            android:layout_alignRight="@+id/textView22"
+            android:layout_alignEnd="@+id/textView22" />
+
+        <TextView
+            android:text="Cirujano"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#040404"
+            android:id="@+id/textView"
+            android:layout_alignBottom="@+id/etfechacirugia"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+    android:text="#Autorizacion"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="#040404"
+            android:id="@+id/textView11"
+            android:layout_alignBottom="@+id/etautorizacion"
+            android:layout_toLeftOf="@+id/etautorizacion"
+            android:layout_toStartOf="@+id/etautorizacion" />
+
+        <TextView
+    android:text="Paciente"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="#040404"
+            android:id="@+id/textView9"
+            android:layout_alignBottom="@+id/etcedula"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+
+        <TextView
+    android:text="Fecha"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="#040404"
+            android:id="@+id/textView21"
+            android:layout_alignTop="@+id/textView"
+            android:layout_toLeftOf="@+id/etfechacirugia"
+            android:layout_toStartOf="@+id/etfechacirugia" />
+
+        <TextView
+            android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="#040404"
+            android:id="@+id/textView15"
+            android:layout_below="@+id/textView17"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="39dp" />
+
+
+        <TextView
+    android:text="Telefono del Paciente"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="#040404"
+            android:id="@+id/textView17"
+            android:layout_alignBottom="@+id/ettelefono_paciente"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+    android:text="NSS"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="#040404"
+    android:id="@+id/textView7"
+            android:layout_alignBottom="@+id/etNSS"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+    android:text="Cedula"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="#040404"
+            android:id="@+id/textView20"
+            android:layout_above="@+id/etautorizacion"
+            android:layout_toRightOf="@+id/textView22"
+            android:layout_toEndOf="@+id/textView22" />
+
+
+        <Spinner
+            android:id="@+id/spBandeja"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"
+            android:drawSelectorOnTop="true"
+            android:layout_marginTop="23dp"
+            android:layout_below="@+id/etfechacirugia"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/spArs"
+            android:layout_alignEnd="@+id/spArs" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Crear Nueva Solicitud"
+            android:id="@+id/textView22"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>

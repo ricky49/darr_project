@@ -1,0 +1,205 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:id="@+id/reportSent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Paciente:"
+                android:id="@+id/textView6"
+                android:textColor="#000000"
+                android:layout_alignBottom="@+id/tvPaciente"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/tvPaciente"
+                android:text="text"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/textView18"
+                android:layout_toEndOf="@+id/textView18" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Seguro:"
+                android:id="@+id/textView2"
+                android:textColor="#000000"
+                android:layout_below="@+id/tvPaciente"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/tvSeguro"
+                android:text="text"
+                android:layout_above="@+id/textView4"
+                android:layout_alignLeft="@+id/tvPaciente"
+                android:layout_alignStart="@+id/tvPaciente" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="NSS:"
+                android:textColor="#000000"
+                android:id="@+id/textView4"
+                android:layout_below="@+id/textView2"
+                android:layout_alignLeft="@+id/textView14"
+                android:layout_alignStart="@+id/textView14" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/tvNSS"
+                android:text="text"
+                android:layout_alignBottom="@+id/textView4"
+                android:layout_alignLeft="@+id/tvSeguro"
+                android:layout_alignStart="@+id/tvSeguro" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Bandeja:"
+                android:textColor="#000000"
+                android:id="@+id/textView8"
+                android:layout_below="@+id/textView4"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/tvBandeja"
+                android:text="text"
+                android:layout_above="@+id/textView10"
+                android:layout_alignLeft="@+id/tvNSS"
+                android:layout_alignStart="@+id/tvNSS" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Fecha Cirugia:"
+                android:textColor="#000000"
+                android:id="@+id/textView10"
+                android:layout_below="@+id/textView8"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/tvFecha"
+                android:text="text"
+                android:layout_above="@+id/textView12"
+                android:layout_alignLeft="@+id/tvBandeja"
+                android:layout_alignStart="@+id/tvBandeja" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Centro:"
+                android:textColor="#000000"
+                android:id="@+id/textView12"
+                android:layout_below="@+id/textView10"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/tvCentro"
+                android:text="text"
+                android:layout_alignBottom="@+id/textView12"
+                android:layout_alignLeft="@+id/tvFecha"
+                android:layout_alignStart="@+id/tvFecha" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Doctor:"
+                android:textColor="#000000"
+                android:id="@+id/textView14"
+                android:layout_below="@+id/textView12"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/tvDoctor"
+                android:text="text"
+                android:layout_above="@+id/textView16"
+                android:layout_alignLeft="@+id/tvCentro"
+                android:layout_alignStart="@+id/tvCentro" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Cirujano:"
+                android:textColor="#000000"
+                android:id="@+id/textView16"
+                android:layout_below="@+id/textView14"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/tvCirujano"
+                android:text="text"
+                android:layout_alignBaseline="@+id/textView16"
+                android:layout_alignBottom="@+id/textView16"
+                android:layout_alignLeft="@+id/tvDoctor"
+                android:layout_alignStart="@+id/tvDoctor" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Observaciones:"
+                android:textColor="#000000"
+                android:id="@+id/textView18"
+                android:layout_below="@+id/textView16"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/tvObservaciones"
+                android:text="text"
+                android:maxLines="1"
+                    android:layout_alignBottom="@+id/textView18"
+                    android:layout_alignLeft="@+id/tvCirujano"
+                    android:layout_alignStart="@+id/tvCirujano" />
+
+</RelativeLayout>

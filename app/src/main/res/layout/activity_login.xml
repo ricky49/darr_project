@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:padding="10dp"
+android:orientation="vertical"
+android:layout_height="match_parent"
+    android:background="#ffffff">
+
+
+
+<EditText
+    android:id="@+id/etUsername"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_above="@+id/etPassword"
+    android:layout_alignRight="@+id/bLogin"
+    android:layout_alignEnd="@+id/bLogin"
+    android:layout_toRightOf="@+id/textView3"
+    android:layout_toEndOf="@+id/textView3" />
+
+<EditText
+    android:id="@+id/etPassword"
+    android:layout_width="match_parent"
+    android:inputType="textPassword"
+    android:layout_height="wrap_content"
+    android:layout_alignBottom="@+id/textView5"
+    android:layout_alignRight="@+id/bLogin"
+    android:layout_alignEnd="@+id/bLogin"
+    android:layout_toRightOf="@+id/textView5"
+    android:layout_toEndOf="@+id/textView5" />
+
+    <Button
+        android:id="@+id/bLogin"
+        android:layout_width="wrap_content"
+        android:text="Login"
+        android:layout_height="wrap_content"
+        android:background="@drawable/roundedbutton"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_above="@+id/ivFingerprint"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="28dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Usuario:"
+        android:id="@+id/textView3"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:layout_above="@+id/etPassword"
+        android:layout_alignLeft="@+id/imageView"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Clave:"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:id="@+id/textView5"
+        android:layout_marginBottom="37dp"
+        android:layout_above="@+id/bLogin"
+        android:layout_toLeftOf="@+id/etUsername"
+        android:layout_toStartOf="@+id/etUsername" />
+
+    <ImageView
+        android:id="@+id/ivFingerprint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/fingerprint_image"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/darr_project"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_above="@+id/etUsername"
+        android:id="@+id/imageView" />
+
+</RelativeLayout>

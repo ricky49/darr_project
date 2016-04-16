@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ricky.darr.core">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="Darr"
+        android:theme="@style/AppTheme"
+        android:largeHeap="true">
+        <activity
+            android:name="ricky.darr.core.MainActivity"
+            android:label="DARR" />
+        <activity
+            android:name="ricky.darr.core.Login"
+            android:label="DARR">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="ricky.darr.core.Register"
+            android:label="Registro" />
+        <activity
+            android:name=".report.Reporte"
+            android:label="Reporte Quirurgico" />
+        <activity
+            android:name=".solicitudes.Solicitudes"
+            android:label="@string/title_activity_solicitudes" />
+        <activity
+            android:name="ricky.darr.core.Fingerprint"
+            android:label="@string/title_activity_fingerprint" />
+
+        <activity
+            android:name="shoppingCar.ShoppingCar"
+            android:label="@string/title_activity_shopping_car" />
+
+        <activity
+            android:name="shoppingCar.Payment"
+            android:label="@string/title_activity_screen2"></activity>
+        <activity
+            android:name="shoppingCar.Checkout"
+            android:label="@string/title_activity_screen1"></activity>
+    </application>
+
+</manifest>

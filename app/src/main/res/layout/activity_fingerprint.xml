@@ -1,0 +1,55 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical"
+    android:background="#ff48ffd9">
+
+
+        <Button
+        android:id="@+id/checksupport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Check Support" />
+
+
+                <Button
+                    android:id="@+id/buttonRegisterFinger"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="register Finger" />
+
+    <Button
+        android:id="@+id/buttonHasRegisteredFinger"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="has Registered Fingerprint" />
+
+    <Button
+        android:id="@+id/buttonIdentify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="identify" />
+
+
+    <Button
+        android:id="@+id/buttonCancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancel Identify" />
+
+
+    <Button
+                    android:id="@+id/buttonGetRegisteredFingerprintName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="get Fingerprint name" />
+
+                <Button
+                    android:id="@+id/buttonIdentifyWithdialog"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="identify With Dialog" />
+
+
+</LinearLayout>
