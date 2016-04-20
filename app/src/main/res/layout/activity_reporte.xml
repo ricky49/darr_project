@@ -15,7 +15,8 @@
                 android:textColor="#000000"
                 android:textStyle="bold"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:id="@+id/textView34" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -24,41 +25,30 @@
                 android:text="Paciente:"
                 android:id="@+id/textView6"
                 android:textColor="#000000"
-                android:layout_alignBaseline="@+id/etpaciente"
-                android:layout_alignBottom="@+id/etpaciente"
+                android:layout_below="@+id/textView34"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="25dp" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/etpaciente"
-                android:layout_alignParentTop="true"
-                android:layout_alignLeft="@+id/etnss"
-                android:layout_alignStart="@+id/etnss"
-                android:layout_marginTop="35dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Seguro:"
-                android:id="@+id/textView2"
-                android:textColor="#000000"
-                android:layout_above="@+id/etnss"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:hint="Paciente"
+                android:layout_below="@+id/textView34"
+                android:layout_toRightOf="@+id/textView6"
+                android:layout_toStartOf="@+id/textView14"
+                android:layout_toLeftOf="@+id/textView14" />
 
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/spArs"
-                android:layout_above="@+id/etnss"
                 android:spinnerMode="dropdown"
-                android:layout_alignLeft="@+id/etdoctor"
-                android:layout_alignStart="@+id/etdoctor" />
+                android:layout_alignTop="@+id/spCentro"
+                android:layout_toEndOf="@+id/etcirujanoID"
+                android:layout_alignLeft="@+id/etnss"
+                android:layout_alignStart="@+id/etnss" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -67,20 +57,19 @@
                 android:text="NSS:"
                 android:textColor="#000000"
                 android:id="@+id/textView4"
-                android:layout_above="@+id/etbandejasID"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignBottom="@+id/etcirujanoID"
+                android:layout_toRightOf="@+id/etcirujanoID"
+                android:layout_toEndOf="@+id/etcirujanoID" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/etnss"
-                android:layout_alignBaseline="@+id/textView4"
+                android:hint="#Seguro"
                 android:layout_alignBottom="@+id/textView4"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignLeft="@+id/spArs"
-                android:layout_alignStart="@+id/spArs" />
+                android:layout_toRightOf="@+id/textView4"
+                android:layout_alignRight="@+id/etdoctor"
+                android:layout_alignEnd="@+id/etdoctor" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -89,19 +78,20 @@
                 android:text="Bandeja:"
                 android:textColor="#000000"
                 android:id="@+id/textView8"
-                android:layout_above="@+id/etFechaCirugia"
+                android:layout_below="@+id/etnss"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="35dp" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/etbandejasID"
-                android:layout_above="@+id/etFechaCirugia"
-                android:layout_alignLeft="@+id/etFechaCirugia"
-                android:layout_alignStart="@+id/etFechaCirugia"
-                android:layout_alignRight="@+id/etnss"
-                android:layout_alignEnd="@+id/etnss" />
+                android:hint="ID bandeja"
+                android:layout_alignBottom="@+id/textView8"
+                android:layout_toLeftOf="@+id/textView10"
+                android:layout_toRightOf="@+id/textView16"
+                android:layout_toEndOf="@+id/textView16" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -110,40 +100,29 @@
                 android:text="Fecha Cirugia:"
                 android:textColor="#000000"
                 android:id="@+id/textView10"
-                android:layout_above="@+id/etdoctor"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignBottom="@+id/etbandejasID"
+                android:layout_centerHorizontal="true" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/etFechaCirugia"
-                android:layout_above="@+id/etdoctor"
-                android:layout_alignLeft="@+id/etdoctor"
-                android:layout_alignStart="@+id/etdoctor"
-                android:layout_alignRight="@+id/etnss"
-                android:layout_alignEnd="@+id/etnss" />
+                android:hint="xx/xx/xxxx"
+                android:layout_alignBottom="@+id/textView10"
+                android:layout_toRightOf="@+id/textView10"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Centro:"
-                android:textColor="#000000"
-                android:id="@+id/textView12"
-                android:layout_alignBaseline="@+id/spCentro"
-                android:layout_alignBottom="@+id/spCentro"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <Spinner
+    <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/spCentro"
-                android:layout_above="@+id/etcirujanoID"
-                android:layout_alignLeft="@+id/etcirujanoID"
-                android:layout_alignStart="@+id/etcirujanoID"
-                android:spinnerMode="dropdown" />
+        android:spinnerMode="dropdown"
+        android:layout_below="@+id/etobservaciones"
+        android:layout_marginTop="25dp"
+        android:layout_toStartOf="@+id/spArs"
+        android:layout_alignRight="@+id/etbandejasID"
+        android:layout_alignEnd="@+id/etbandejasID" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -152,18 +131,17 @@
                 android:text="Doctor:"
                 android:textColor="#000000"
                 android:id="@+id/textView14"
-                android:layout_alignBaseline="@+id/etdoctor"
-                android:layout_alignBottom="@+id/etdoctor"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignTop="@+id/textView6"
+                android:layout_toLeftOf="@+id/etdoctor"
+                android:layout_toStartOf="@+id/etdoctor" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/etdoctor"
-                android:layout_above="@+id/spCentro"
-                android:layout_alignLeft="@+id/benviarReporte"
-                android:layout_alignStart="@+id/benviarReporte"
+                android:hint="Doctor"
+                android:layout_alignBottom="@+id/textView14"
+                android:layout_toRightOf="@+id/benviarReporte"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
 
@@ -174,21 +152,21 @@
                 android:text="Cirujano:"
                 android:textColor="#000000"
                 android:id="@+id/textView16"
-                android:layout_alignBaseline="@+id/etcirujanoID"
-                android:layout_alignBottom="@+id/etcirujanoID"
-                android:layout_alignRight="@+id/textView6"
-                android:layout_alignEnd="@+id/textView6" />
+                android:layout_marginTop="34dp"
+                android:layout_below="@+id/etpaciente"
+                android:layout_toLeftOf="@+id/etcirujanoID"
+                android:layout_toStartOf="@+id/etcirujanoID" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/etcirujanoID"
-                android:layout_marginBottom="33dp"
-                android:layout_above="@+id/benviarReporte"
-                android:layout_alignLeft="@+id/benviarReporte"
-                android:layout_alignStart="@+id/benviarReporte"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:hint="Cirujano"
+                android:layout_alignBottom="@+id/textView16"
+                android:layout_alignLeft="@+id/etpaciente"
+                android:layout_alignStart="@+id/etpaciente"
+                android:layout_alignRight="@+id/etpaciente"
+                android:layout_alignEnd="@+id/etpaciente" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -197,7 +175,7 @@
                 android:text="Observaciones:"
                 android:textColor="#000000"
                 android:id="@+id/textView18"
-                android:layout_above="@+id/benviarReporte"
+                android:layout_alignBottom="@+id/etobservaciones"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
@@ -206,9 +184,11 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/etobservaciones"
                 android:maxLines="1"
-                android:layout_alignBottom="@+id/textView18"
-                android:layout_alignLeft="@+id/benviarReporte"
-                android:layout_alignStart="@+id/benviarReporte"
+
+                android:layout_below="@+id/etbandejasID"
+                android:layout_toRightOf="@+id/textView18"
+                android:layout_marginTop="18dp"
+                android:layout_toStartOf="@+id/etFechaCirugia"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
 
@@ -219,7 +199,8 @@
                 android:background="@drawable/roundedbutton"
                 android:layout_gravity="center_horizontal"
                 android:text="Enviar"
-                android:layout_alignParentBottom="true"
+                android:layout_marginTop="50dp"
+                android:layout_below="@+id/spArs"
                 android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

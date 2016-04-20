@@ -1,5 +1,6 @@
 package ShoppingCar;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -29,17 +30,22 @@ public class CheckoutAdapter extends ArrayAdapter{
     List list = new ArrayList();
     String urlCar = "http://54.218.36.180:2000/api/cars/";
     ArrayList<Integer>product = new ArrayList<>();
-    int value =0;
+    int value = 0;
+    Activity activity;
+    TextView general;
 
-    public CheckoutAdapter(Context context, int resource) {
+    public CheckoutAdapter(Context context, int resource,TextView generalTotal, Activity activity) {
         super(context, resource);
+        this.activity = activity;
+        this.general = generalTotal;
     }
 
     public void add(ModelProducts modelProducts){
         super.add(modelProducts);
-        value += Integer.valueOf(modelProducts.getQuantity().toString()) * Integer.valueOf(modelProducts.getProductPrice().toString());
         list.add(modelProducts);
         notifyDataSetChanged();
+       // value += Integer.valueOf(modelProducts.getQuantity().toString()) * Integer.valueOf(modelProducts.getProductPrice().toString());
+
     }
 
     public int getCount(){
@@ -54,14 +60,11 @@ public class CheckoutAdapter extends ArrayAdapter{
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View row;
-        View vi;
         row = convertView;
         final ProductHolder productHolder;
         if(row ==null){
             LayoutInflater layoutInflater = (LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = layoutInflater.inflate(R.layout.activity_screen1,parent,false);
-            vi = layoutInflater.inflate(R.layout.displaycar,parent,false);
-            final TextView textView = (TextView)vi.findViewById(R.id.generalTotal);
             productHolder = new ProductHolder();
             productHolder.tx_productName = (TextView) row.findViewById(R.id.carProducto);
             productHolder.tx_productPrice = (TextView) row.findViewById(R.id.carPrecio);
@@ -81,12 +84,21 @@ public class CheckoutAdapter extends ArrayAdapter{
                     thread.start();
                     try {
                         thread.join();
-                        textView.setText(String.valueOf(value - Integer.valueOf(productHolder.tx_total.getText().toString().substring(2))));
+                        activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                value = Integer.valueOf(general.getText().toString().substring(3));
+                                int newTotal = value - Integer.valueOf(productHolder.tx_total.getText().toString().substring(2));
+                                general.setText(String.valueOf(" $ "+newTotal));
+                                //general.invalidate();
+                            }
+                        });
+
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
 
-                    list.remove(position);
+                    list.remove(productHolder.ref);
                     notifyDataSetChanged();
                     Toast.makeText(getContext(), "Removido", Toast.LENGTH_SHORT).show();
                 }
@@ -118,7 +130,7 @@ public class CheckoutAdapter extends ArrayAdapter{
         int ref;
     }
 
-    private void deleteCar(String id){
+    private void deleteCar(String id) {
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("", id));
         String url = urlCar+id;

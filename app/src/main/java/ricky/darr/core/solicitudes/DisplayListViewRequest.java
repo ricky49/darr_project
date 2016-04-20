@@ -33,10 +33,10 @@ public class DisplayListViewRequest extends Fragment{
     FloatingActionButton button;
     android.support.v4.app.FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
+    View view;
 
     public View onCreateView (LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.display_listview_request, container, false);
-        getRequest();
+        view = inflater.inflate(R.layout.display_listview_request, container, false);
         datosSolicitudAdapter = new DatosSolicitudAdapter(getActivity(),R.layout.request_sent);
         listView = (ListView) view.findViewById(R.id.listViewRequest);
         listView.setAdapter(datosSolicitudAdapter);
@@ -52,7 +52,11 @@ public class DisplayListViewRequest extends Fragment{
             }
         });
 
-         Thread thread = new Thread(
+        requestContent();
+        return view;
+    }
+    private void requestContent(){
+        Thread thread = new Thread(
                 new Runnable() {
                     @Override
                     public void run() {
@@ -103,9 +107,14 @@ public class DisplayListViewRequest extends Fragment{
 
                                 total = "";
 
-                                DatosSolicitudes datosSolicitudes= new DatosSolicitudes(paciente,ars, procedimiento_id, documento, tel, autorizacion, fecha, centro, cirujano, bandeja, total,nss,status);
+                                final DatosSolicitudes datosSolicitudes= new DatosSolicitudes(paciente,ars, procedimiento_id, documento, tel, autorizacion, fecha, centro, cirujano, bandeja, total,nss,status);
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        datosSolicitudAdapter.add(datosSolicitudes);
+                                    }
+                                });
 
-                                datosSolicitudAdapter.add(datosSolicitudes);
                                 count++;
 
 
@@ -113,13 +122,11 @@ public class DisplayListViewRequest extends Fragment{
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        Thread.currentThread().interrupt();
 
                     }
                 }
         );
         thread.start();
-        return view;
     }
 
     public void getRequest(){
@@ -132,11 +139,23 @@ public class DisplayListViewRequest extends Fragment{
             }
         });
         thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    }
+
+    @Override
+    public void onResume() {
+        getRequest();
+        datosSolicitudAdapter = new DatosSolicitudAdapter(getActivity(),R.layout.request_sent);
+        listView = (ListView) view.findViewById(R.id.listViewRequest);
+        listView.setAdapter(datosSolicitudAdapter);
+        requestContent();
+        super.onResume();
+    }
+    public void refresh(){
+        getRequest();
+        datosSolicitudAdapter = new DatosSolicitudAdapter(getActivity(),R.layout.request_sent);
+        listView = (ListView) view.findViewById(R.id.listViewRequest);
+        listView.setAdapter(datosSolicitudAdapter);
+        requestContent();
     }
 }
 

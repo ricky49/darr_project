@@ -27,18 +27,17 @@ import ricky.darr.core.solicitudes.DisplayListViewRequest;
 import ricky.darr.core.webservice_controller.TxnThread;
 import sessionManager.SessionManager;
 import ShoppingCar.ShoppingCar;
+import ShoppingCar.Checkout;
 
 public class MainActivity extends AppCompatActivity{
 
     TabLayout tabLayout;
     ViewPager viewPager;
-    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        textView = (TextView)findViewById(R.id.carlength);
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.setAdapter(new CustomAdapter(getSupportFragmentManager(),getApplicationContext()));
@@ -62,6 +61,7 @@ public class MainActivity extends AppCompatActivity{
                 viewPager.setCurrentItem(tab.getPosition());
             }
         });
+
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -72,15 +72,14 @@ public class MainActivity extends AppCompatActivity{
             public void onPageSelected(int position) {
                 Fragment fragment = ((CustomAdapter)viewPager.getAdapter()).getFragment(position);
 
-                if(position ==1 && fragment!=null){
+                if(position == 3 && fragment!=null){
                     fragment.onResume();
                 }
-                if(position ==0 && fragment!=null){
+
+                if(position == 1 && fragment!=null){
                     fragment.onResume();
                 }
-                if(position ==2 && fragment!=null){
-                    fragment.onResume();
-                }
+
             }
 
             @Override
@@ -107,22 +106,8 @@ public class MainActivity extends AppCompatActivity{
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 return true;
-            case R.id.refresh:
-                final DatosReporte datosReporte = new DatosReporte();
-                final DatosSolicitudes datosSolicitudes = new DatosSolicitudes();
-                final TxnThread thread = new TxnThread(this,false,false);
-                thread.setTitle("Cargando Datos");
-                thread.setText("Por favor,espere");
-                         thread.setRunnable(new Runnable() {
-                             @Override
-                             public void run() {
-                                 datosReporte.getReports();
-                                 datosSolicitudes.getRequest();
-                                 thread.close();
-                             }
-                         });
-                thread.show();
-                return true;
+//            case R.id.refresh:
+//                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -132,7 +117,7 @@ public class MainActivity extends AppCompatActivity{
         private FragmentManager mFragmentManager;
         private Context mcontext;
 
-        private String fragments [] = {"REPORTE","SOLICITUDES","Productos"};
+        private String fragments [] = {"REPORTES","SOLICITUDES","PRODUCTOS", "CARRITO"};
 
         public CustomAdapter(FragmentManager supportFragmentManager, Context applicationContext) {
             super(supportFragmentManager);
@@ -150,6 +135,8 @@ public class MainActivity extends AppCompatActivity{
                     return new DisplayListViewRequest();
                 case 2:
                     return new ShoppingCar();
+                case 3:
+                    return new Checkout();
                 default:
                     return null;
             }
@@ -165,10 +152,6 @@ public class MainActivity extends AppCompatActivity{
             return fragments[position];
         }
 
-        @Override
-        public int getItemPosition(Object object) {
-            return POSITION_NONE;
-        }
 
         @Override
         public Object instantiateItem(ViewGroup container, int position){

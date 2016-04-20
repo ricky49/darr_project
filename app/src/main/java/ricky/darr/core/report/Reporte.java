@@ -27,7 +27,7 @@ public class Reporte  extends Fragment{
     String subject="Reporte Medico ";
     String bodyMessage="Un reporte fue enviado desde esta cuenta, sino fue usted el responsable, por favor envie un mail a esta cuenta lo antes posible";
     String bodyMessageAdmin="Nuevo Reporte recibido";
-    DatosReporte datosReporte;
+
 
     public View onCreateView (LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 

@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -39,6 +41,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     EditText etUsername, etPassword;
     ImageView fingerprint;
     String fingerId;
+    ConnectionDetector cd;
+
+    Boolean isInternetPresent;
 
     private Spass spass=new Spass();
     private SpassFingerprint mSpassFingerprint;
@@ -108,7 +113,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         //registerLink = (TextView) findViewById(R.id.tvRegisterLink);
         fingerprint = (ImageView) findViewById(R.id.ivFingerprint);
 
-
         bLogin.setOnClickListener(this);
         //registerLink.setOnClickListener(this);
         fingerprint.setOnClickListener(this);
@@ -119,9 +123,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bLogin:
+                cd = new ConnectionDetector(getApplicationContext());
+                isInternetPresent = cd.isConnectingToInternet();
                  String username = etUsername.getText().toString();
                  String password = etPassword.getText().toString();
-                login(username, password,"0",false);
+                if (username.equals("") || password.equals("")) {
+                 emptyField();
+                }else if(isInternetPresent){
+                    login(username, password,"0",false);
+                }else{
+                    noConnection();
+                }
 
                 break;
             case R.id.ivFingerprint:
@@ -141,8 +153,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                                     onReadyIdentify=true;
                                     mSpassFingerprint.startIdentifyWithDialog(Login.this,listener,true);
                                     Toast.makeText(Login.this,"identify finger to verify",Toast.LENGTH_SHORT).show();
-
-
 
                                 }catch (SpassInvalidStateException ise){
                                     onReadyIdentify=false;
@@ -182,15 +192,36 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         dialogBuilder.setPositiveButton("Ok", null);
         dialogBuilder.show();
     }
+    private void noConnection() {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+
+        // Setting Dialog Title
+        alertDialog.setTitle("No internet Connection");
+
+        // Setting Dialog Message
+        alertDialog.setMessage("Actualmente, no posee conexion a internet");
+
+        // Setting alert dialog icon
+        alertDialog.setIcon(R.drawable.warning);
+
+        // Setting OK Button
+        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        // Showing Alert Message
+        alertDialog.show();
+    }
     private void emptyField() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Login.this);
-        dialogBuilder.setMessage("Uno o mas campos estan Vacio, para continuar, favor llenar todos los campos");
+        dialogBuilder.setMessage("Completar el campo de usuario y password, antes de continuar");
         dialogBuilder.setPositiveButton("Ok", null);
         dialogBuilder.show();
     }
 
     public void login(final String username, final String password, final String fingerprint, final Boolean scanner){
-        final TxnThread txnThread = new TxnThread(Login.this,false,false);
+        final TxnThread txnThread = new TxnThread(Login.this,true,true);
         final User user = new User();
         final ModelProducts modelProducts = new ModelProducts();
         final DatosReporte datosReporte = new DatosReporte();
@@ -205,16 +236,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
          txnThread.setRunnable(new Runnable() {
              @Override
              public void run() {
-                 if (username.equals("") || password.equals("") && scanner ==false) {
-                     txnThread.close();
-                     runOnUiThread(new Runnable() {
-                         @Override
-                         public void run() {
-                             emptyField();
-                         }
-                     });
-
-                 } else {
                      txnThread.setTitle("Verificando Credenciales");
                      txnThread.setText("Cargando los Datos");
                      JSONObject loginObject = user.loginUser(username, password, fingerprint);
@@ -224,7 +245,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                              @Override
                              public void run() {
                                  if (scanner) {
-                                    showMessage(fingerId);
+                                     showMessage(fingerId);
                                  } else {
                                      showErrorMessage();
                                  }
@@ -259,7 +280,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                                  SessionManager.getInstance().getSession().setCenter(centerList);
                              }
 
-                             for (int i = 0; i < insurances.length(); i++) {
+                             for (int i = 0; i < insurances.length() - 1; i++) {
                                  JSONObject jInsurances = insurances.getJSONObject(i);
                                  String insurance_name = String.valueOf(jInsurances.getString("insurance_name"));
                                  insuranceList.add(insurance_name);
@@ -299,8 +320,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                          }
 
                      }
-                 }
-
 
                  txnThread.close();
 
@@ -329,8 +348,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 .show();
 
     }
-
-
 
 }
 

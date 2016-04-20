@@ -33,10 +33,8 @@ import sessionManager.SessionManager;
 public class ProductsAdapter extends ArrayAdapter {
     List list = new ArrayList();
     String urlCar = "http://54.218.36.180:2000/api/cars";
-    ArrayList<Integer>product = new ArrayList<>();
-    int value = 0;
     private String arr [];
-    ShoppingCar shoppingCar = new ShoppingCar();
+    JSONObject jsonObject;
 
 
     public ProductsAdapter(Context context, int resource) {
@@ -61,37 +59,34 @@ public class ProductsAdapter extends ArrayAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        arr =new String[getCount()];
+        arr = new String[getCount()];
         View row;
         row = convertView;
-        final View vi;
         final ProductHolder productHolder;
         if(row ==null){
             LayoutInflater layoutInflater = (LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = layoutInflater.inflate(R.layout.productlist,parent,false);
-            vi = layoutInflater.inflate(R.layout.activity_shopping_car,parent,false);
-            final TextView textView = (TextView)vi.findViewById(R.id.carlength);
             productHolder = new ProductHolder();
             productHolder.tx_productName = (TextView) row.findViewById(R.id.txtProducto);
             productHolder.tx_productPrice = (TextView) row.findViewById(R.id.txtPrecio);
             productHolder.tx_productCode = (TextView) row.findViewById(R.id.txtCodigo);
             productHolder.etcantidad = (EditText) row.findViewById(R.id.etCantidad);
-            productHolder.etcantidad.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    arr[productHolder.ref] = s.toString();
-                }
-            });
+//            productHolder.etcantidad.addTextChangedListener(new TextWatcher() {
+//                @Override
+//                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//                }
+//
+//                @Override
+//                public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//                }
+//
+//                @Override
+//                public void afterTextChanged(Editable s) {
+//                    arr[productHolder.ref] = s.toString();
+//                }
+//            });
             productHolder.btagregar =(Button) row.findViewById(R.id.agregar);
             productHolder.btagregar.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -100,30 +95,20 @@ public class ProductsAdapter extends ArrayAdapter {
                         Thread thread = new Thread(new Runnable() {
                             @Override
                             public void run() {
-                                sendToCar(SessionManager.getInstance().getSession().getProductId().get(position), productHolder.etcantidad.getText().toString());
+                                jsonObject = sendToCar(SessionManager.getInstance().getSession().getProductId().get(productHolder.ref), productHolder.etcantidad.getText().toString());
                                 ModelProducts modelProducts = new ModelProducts();
                                 modelProducts.getCar();
                             }
                         });
                     thread.start();
-                    try {
-                        thread.join();
-                        value = SessionManager.getInstance().getSession().getCarProduct().length();
-                        textView.setText(String.valueOf(value));
-                        vi.setVisibility(vi.VISIBLE);
-                        vi.invalidate();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-                    Toast.makeText(getContext(), "agregado", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"agregado al carro",Toast.LENGTH_SHORT).show();
                 }
             });
             row.setTag(productHolder);
         }else{
             productHolder =(ProductHolder)row.getTag();
         }
-        productHolder.ref =position;
+        productHolder.ref = position;
         ModelProducts modelProducts = (ModelProducts)this.getItem(position);
         productHolder.tx_productName.setText(modelProducts.getProductName());
         productHolder.tx_productCode.setText(modelProducts.getProductCode());
@@ -147,13 +132,14 @@ public class ProductsAdapter extends ArrayAdapter {
         int ref;
     }
 
-    private void sendToCar(String id,String quantity){
+    private JSONObject sendToCar(String id,String quantity){
 
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("user_id", SessionManager.getInstance().getSession().getUser_id()));
         params.add(new BasicNameValuePair("product_id", id));
         params.add(new BasicNameValuePair("quantity", quantity));
         JSONObject json = JsonParser.postJSONFromUrl(urlCar, params);
+        return json;
     }
 
 

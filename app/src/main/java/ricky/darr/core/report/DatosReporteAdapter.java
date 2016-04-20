@@ -27,6 +27,7 @@ public class DatosReporteAdapter extends ArrayAdapter {
     public void add(DatosReporte datosReporte){
         super.add(datosReporte);
         list.add(datosReporte);
+
     }
 
     public int getCount(){

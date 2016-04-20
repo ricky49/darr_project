@@ -26,26 +26,26 @@
             android:layout_gravity="center_horizontal|bottom" />
     </LinearLayout>
 
-    <Button
-        android:layout_width="80dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="5dp"
-        android:id="@+id/bViewCar"
-        android:text="Cart"
-        android:onClick="newCart"
-        android:background="@drawable/roundedbutton"
-        android:layout_marginRight="30dp"
-        android:layout_gravity="right|top" />
+    <!--<Button-->
+        <!--android:layout_width="80dp"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:id="@+id/bViewCar"-->
+        <!--android:text="Cart"-->
+        <!--android:onClick="newCart"-->
+        <!--android:background="@drawable/roundedbutton"-->
+        <!--android:layout_marginRight="30dp"-->
+        <!--android:layout_gravity="right|top" />-->
 
-    <TextView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
-        android:textColor="#ffffff"
-        android:background="@drawable/redcircleandroid"
-        android:text="10"
-        android:gravity="center_vertical|center_horizontal"
-        android:id="@+id/carlength"
-        android:layout_gravity="right|top" />
+    <!--<TextView-->
+        <!--android:layout_width="25dp"-->
+        <!--android:layout_height="25dp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:background="@drawable/redcircleandroid"-->
+        <!--android:text="10"-->
+        <!--android:gravity="center_vertical|center_horizontal"-->
+        <!--android:id="@+id/carlength"-->
+        <!--android:layout_gravity="right|top" />-->
 </FrameLayout>

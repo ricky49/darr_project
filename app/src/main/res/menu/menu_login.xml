@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="ricky.darr.core.Login">
 
-    <item
-        android:id="@+id/refresh"
-        android:title="Refrescar"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
+    <!--<item-->
+        <!--android:id="@+id/refresh"-->
+        <!--android:title="Refrescar"-->
+        <!--android:orderInCategory="100"-->
+        <!--app:showAsAction="never" />-->
     <item
         android:id="@+id/log_out_id"
-        android:title="Salir"
+        android:title="Cerrar Sesion"
         android:orderInCategory="100"
         app:showAsAction="never" />
 </menu>

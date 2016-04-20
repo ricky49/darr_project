@@ -27,33 +27,29 @@ public class ShoppingCar extends Fragment{
     ListView listView;
     Button bViewCart;
     JSONArray products;
-    TextView carlenght;
+    //TextView carlenght;
     android.support.v4.app.FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     View view;
-    ViewGroup viewGroup;
 
 
     public View onCreateView (LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_shopping_car, container, false);
-        viewGroup = container;
         productsAdapter = new ProductsAdapter(getActivity(),R.layout.productlist);
         listView = (ListView) view.findViewById(R.id.listProduct);
         listView.setAdapter(productsAdapter);
-        carlenght = (TextView)view.findViewById(R.id.carlength);
-        carlenght.setText(String.valueOf(SessionManager.getInstance().getSession().getCarProduct().length()));
-        bViewCart = (Button) view.findViewById(R.id.bViewCar);
-        bViewCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                fragmentManager = getFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.productContainer, new Checkout());
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            }
-        });
+//        bViewCart = (Button) view.findViewById(R.id.bViewCar);
+//        bViewCart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                fragmentManager = getFragmentManager();
+//                fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.replace(R.id.productContainer, new Checkout());
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.commit();
+//            }
+//        });
 
 
         final Thread thread = new Thread(
@@ -75,9 +71,15 @@ public class ShoppingCar extends Fragment{
 
                                 productId.add(product_id);
                                 SessionManager.getInstance().getSession().setProductId(productId);
-                                ModelProducts modelProducts= new ModelProducts(product_name,product_code,product_price);
+                                final ModelProducts modelProducts = new ModelProducts(product_name,product_code,product_price);
 
-                                productsAdapter.add(modelProducts);
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        productsAdapter.add(modelProducts);
+                                    }
+                                });
+
                                 count++;
                             }
                         } catch (JSONException e) {

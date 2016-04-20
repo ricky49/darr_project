@@ -25,9 +25,9 @@ public class DatosSolicitudAdapter extends ArrayAdapter {
     }
 
     public void add(DatosSolicitudes datosSolicitudes){
-        super.add(datosSolicitudes);
         list.add(datosSolicitudes);
         notifyDataSetChanged();
+        super.add(datosSolicitudes);
     }
 
     public int getCount(){
@@ -58,7 +58,6 @@ public class DatosSolicitudAdapter extends ArrayAdapter {
             datosSolicitudesHolder.tx_cirujano = (TextView) row.findViewById(R.id.txtCirujano);
             datosSolicitudesHolder.tx_procedimiento = (TextView) row.findViewById(R.id.txtProcedimiento);
             datosSolicitudesHolder.tx_bandeja = (TextView) row.findViewById(R.id.txtBandeja);
-            datosSolicitudesHolder.tx_total = (TextView) row.findViewById(R.id.txtTotal);
             datosSolicitudesHolder.tx_nss = (TextView) row.findViewById(R.id.txtNss);
             datosSolicitudesHolder.tx_status = (TextView) row.findViewById(R.id.txtStatus);
             row.setTag(datosSolicitudesHolder);
@@ -76,7 +75,6 @@ public class DatosSolicitudAdapter extends ArrayAdapter {
         datosSolicitudesHolder.tx_cirujano.setText(datosSolicitudes.getCirujano_name());
         datosSolicitudesHolder.tx_procedimiento.setText(datosSolicitudes.getProcedimiento());
         datosSolicitudesHolder.tx_bandeja.setText(datosSolicitudes.getBandeja());
-        datosSolicitudesHolder.tx_total.setText(datosSolicitudes.getTotal());
         datosSolicitudesHolder.tx_nss.setText(datosSolicitudes.getNss());
         datosSolicitudesHolder.tx_status.setText(datosSolicitudes.getStatus());
 
@@ -91,6 +89,6 @@ public class DatosSolicitudAdapter extends ArrayAdapter {
     }
 
     static class DatosSolicitudesHolder{
-        TextView tx_paciente,tx_documento,tx_tel,tx_ars,tx_autorizacion,tx_fecha,tx_centro,tx_cirujano,tx_procedimiento,tx_bandeja,tx_total,tx_nss,tx_status;
+        TextView tx_paciente,tx_documento,tx_tel,tx_ars,tx_autorizacion,tx_fecha,tx_centro,tx_cirujano,tx_procedimiento,tx_bandeja,tx_nss,tx_status;
     }
 }

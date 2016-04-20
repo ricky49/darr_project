@@ -28,12 +28,12 @@ public class DisplayListView extends Fragment {
     FloatingActionButton button;
     android.support.v4.app.FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
+    View view;
 
     public View onCreateView (LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.display_listview_report, container, false);
+        view = inflater.inflate(R.layout.display_listview_report, container, false);
         datosReporteAdapter = new DatosReporteAdapter(getActivity(),R.layout.report_sent);
         listView = (ListView) view.findViewById(R.id.listView);
-        listView.invalidateViews();
         listView.setAdapter(datosReporteAdapter);
         button = (FloatingActionButton)view.findViewById(R.id.floatingReport);
         button.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +47,11 @@ public class DisplayListView extends Fragment {
             }
         });
 
+        reportContent();
+        return view;
+    }
+
+    private void reportContent(){
         Thread thread = new Thread(
                 new Runnable() {
                     @Override
@@ -73,8 +78,14 @@ public class DisplayListView extends Fragment {
                                     observaciones = jsonObject.getString("observations");
                                 }
 
-                                DatosReporte datosReporte = new DatosReporte(paciente,aseguradora,centro,nss, doctor, bandeja, cirujano, observaciones,fecha);
-                                datosReporteAdapter.add(datosReporte);
+                                final DatosReporte datosReporte = new DatosReporte(paciente,aseguradora,centro,nss, doctor, bandeja, cirujano, observaciones,fecha);
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        datosReporteAdapter.add(datosReporte);
+                                    }
+                                });
+
                                 count++;
 
 
@@ -82,12 +93,31 @@ public class DisplayListView extends Fragment {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-
                     }
                 }
         );
         thread.start();
-        return view;
+    }
+
+    private void getReport(){
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                DatosReporte datosReporte = new DatosReporte();
+                datosReporte.getReports();
+            }
+        });
+        thread.start();
+    }
+
+    @Override
+    public void onResume() {
+        getReport();
+        datosReporteAdapter = new DatosReporteAdapter(getActivity(),R.layout.report_sent);
+        listView = (ListView) view.findViewById(R.id.listView);
+        listView.setAdapter(datosReporteAdapter);
+        reportContent();
+        super.onResume();
     }
 }

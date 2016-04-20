@@ -1,6 +1,7 @@
 package ShoppingCar;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ import ricky.darr.core.R;
 import sessionManager.SessionManager;
 
 public class Checkout extends Fragment {
-    View vi;
+
     CheckoutAdapter checkoutAdapter;
     JSONArray carList;
     JSONArray products;
@@ -32,15 +33,13 @@ public class Checkout extends Fragment {
     TextView generalTotal;
     android.support.v4.app.FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
-
+    View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.displaycar, container, false);
-        vi = inflater.inflate(R.layout.activity_shopping_car,container,false);
-        getCart();
-        checkoutAdapter = new CheckoutAdapter(getActivity(),R.layout.activity_screen1);
+        view = inflater.inflate(R.layout.displaycar, container, false);
         generalTotal = (TextView) view.findViewById(R.id.generalTotal);
+        checkoutAdapter = new CheckoutAdapter(getActivity(),R.layout.activity_screen1,generalTotal,getActivity());
         listView = (ListView) view.findViewById(R.id.listCar);
         listView.setAdapter(checkoutAdapter);
         payment =(Button)view.findViewById(R.id.Payment);
@@ -79,6 +78,7 @@ public class Checkout extends Fragment {
                     @Override
                     public void run() {
                         try {
+
                             carList = SessionManager.getInstance().getSession().getCarProduct();
                             products = SessionManager.getInstance().getSession().getProductArray();
                             int count = 0;
@@ -100,14 +100,26 @@ public class Checkout extends Fragment {
                                         product_price = jsonObject2.getString("PRECIO");
                                         total = String.valueOf(Integer.valueOf(product_price) * Integer.valueOf(product_quantity));
                                         x += Integer.valueOf(total);
-                                        ModelProducts modelProducts= new ModelProducts(product_name,product_code,product_price,product_quantity,total);
-                                        checkoutAdapter.add(modelProducts);
+                                        final ModelProducts modelProducts= new ModelProducts(product_name,product_code,product_price,product_quantity,total);
+                                        getActivity().runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                checkoutAdapter.add(modelProducts);
+                                            }
+                                        });
+
                                     }
                                 }
 
                             }
+                            final int result = x;
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    generalTotal.setText(" $ "+String.valueOf(result));
+                                }
+                            });
 
-                            generalTotal.setText(" $ "+String.valueOf(x));
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -119,21 +131,51 @@ public class Checkout extends Fragment {
     }
     public void getCart(){
 
+
         Thread thread = new Thread(new Runnable() {
+            String _id ="";
+            ArrayList<String> carId = new ArrayList<>();
             @Override
             public void run() {
-                  ModelProducts modelProducts = new ModelProducts();
+                int count =0;
+                ModelProducts modelProducts = new ModelProducts();
                 modelProducts.getCar();
+                try {
+
+                    JSONArray carList = SessionManager.getInstance().getSession().getCarProduct();
+                    while(count < carList.length())
+                    {
+                        JSONObject jsonObject = carList.getJSONObject(count);
+                        _id = jsonObject.getString("_id");
+                        carId.add(_id);
+                        SessionManager.getInstance().getSession().setCarId(carId);
+                        count++;
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
         thread.start();
         try {
             thread.join();
-            TextView textView = (TextView)vi.findViewById(R.id.carlength);
-            textView.setText(String.valueOf(SessionManager.getInstance().getSession().getCarProduct().length()));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+
+    @Override
+    public void onResume() {
+        getCart();
+        generalTotal = (TextView) view.findViewById(R.id.generalTotal);
+        checkoutAdapter = new CheckoutAdapter(getActivity(),R.layout.activity_screen1,generalTotal,getActivity());
+        listView = (ListView) view.findViewById(R.id.listCar);
+        listView.setAdapter(checkoutAdapter);
+        carContent();
+        super.onResume();
     }
 }
 

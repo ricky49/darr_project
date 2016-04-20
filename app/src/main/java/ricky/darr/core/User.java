@@ -36,14 +36,13 @@ public class User {
     }
 
     public JSONObject loginUser(String user, String pass,String fingerprint) {
-
-        System.out.println(fingerprint);
         // Building Parameters
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("user", user));
         params.add(new BasicNameValuePair("pass", pass));
         params.add(new BasicNameValuePair("fingerprint",fingerprint));
         JSONObject json = JsonParser.postJSONFromUrl(authenticate, params);
+        System.out.println(json);
         return json;
     }
 }
